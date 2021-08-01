@@ -11,6 +11,8 @@ from linebot.models import (
 )
 import os
 
+from models import get_one
+
 app = Flask(__name__)
 
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -39,9 +41,14 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    if message == "currect humidity?":
+        reply_text = get_one(message)
+    else
+        reply_text = "error..."
+
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=reply_text))
 
 
 if __name__ == "__main__":
