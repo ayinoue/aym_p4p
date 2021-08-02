@@ -43,7 +43,7 @@ def callback():
 def handle_message(event):
     reply_text = "none"
     if event.message.text == "1":
-        reply_text = str(get_one())
+        reply_text = test_get_one()
     else:
         reply_text = "error..."
 

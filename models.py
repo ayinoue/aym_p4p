@@ -24,5 +24,11 @@ def get_one():
     
     return value
 
+###########################################################
+#debug
+def test_get_one():
+    return 'test'
+
+
 #https://www.w3schools.com/python/python_mongodb_sort.asp
 
