@@ -15,13 +15,14 @@ mycol = mydb.sensorData
 
 ###########################################################
 #get currect soil humidity
-def get_one(message):
+def get_one():
     data = mycol.find().sort("_id", -1)
-
+    value = ""
     for i in data:
-        reply_text = "土壌湿度" + i["humidity"] +  "%"
-        return reply_text
+        value = "土壌湿度" + i["humidity"] +  "%"
         break
+    
+    return value
 
 #https://www.w3schools.com/python/python_mongodb_sort.asp
 
