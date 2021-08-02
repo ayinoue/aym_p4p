@@ -43,13 +43,18 @@ def callback():
 def handle_message(event):
     if message == "currect humidity?":
         reply_text = get_one(message)
-    else
+    else:
         reply_text = "error..."
 
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=reply_text))
 
+""" @handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=event.message.text)) """
 
 if __name__ == "__main__":
 #    app.run()
