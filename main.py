@@ -11,7 +11,7 @@ from linebot.models import (
 )
 import os
 
-from models import get_one
+from models import get_one, test_get_one
 
 app = Flask(__name__)
 
