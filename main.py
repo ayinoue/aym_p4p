@@ -42,7 +42,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     reply_text = "none"
-    if event.message.text == "1":
+    if message == "abc":
         reply_text = test_get_one()
     else:
         reply_text = "error..."
