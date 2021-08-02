@@ -41,15 +41,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    reply_text = "none"
     if event.message.text == "abc":
-        reply_text = get_one()
-    else:
-        reply_text = "error..."
-
-    line_bot_api.push_message(
+        line_bot_api.push_message(
         os.environ["LINE_USER_ID"],
-        TextSendMessage(text=reply_text))
+        TextSendMessage(text="hello"))
 
 """ @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
