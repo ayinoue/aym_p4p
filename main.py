@@ -42,8 +42,8 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     reply_text = "none"
-    if event.message.text == "currect humidity?":
-        reply_text = get_one()
+    if event.message.text == "1":
+        reply_text = str(get_one())
     else:
         reply_text = "error..."
 
