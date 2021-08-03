@@ -6,8 +6,8 @@ import time
 
 ###########################################################
 #connect database
-#db_user = os.environ["mongodb_user"]
-#db_pw = os.environ["mongodb_pw"]
+db_user = os.environ["mongodb_user"]
+db_pw = os.environ["mongodb_pw"]
 conn = "mongodb+srv://" + db_user + ":" + db_pw + "@cluster0.vaogw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 myclient = pymongo.MongoClient(conn)
 mydb = myclient.RPi
