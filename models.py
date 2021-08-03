@@ -17,12 +17,12 @@ mycol = mydb.sensorData
 #get currect soil humidity
 def get_one():
     data = mycol.find().sort("_id", -1)
-    body = {"type": "text"}
+
     for i in data:
-        body["text"] = "土壌湿度" + i["humidity"] +  "%"
+        text = "土壌湿度" + i["humidity"] +  "%"
         break
     
-    return body
+    return text
 
 ###########################################################
 #debug
