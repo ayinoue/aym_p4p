@@ -11,7 +11,7 @@ from linebot.models import (
 )
 import os
 
-from models import get_one
+from models import get_one, set_db
 
 app = Flask(__name__)
 
@@ -57,5 +57,6 @@ def handle_message(event):
 
 if __name__ == "__main__":
 #    app.run()
-    port = int(os.getenv("PORT", 5000))
+    port = int(os.getenv("PORT", 8000))
     app.run(host="0.0.0.0", port=port)
+    set_db()
