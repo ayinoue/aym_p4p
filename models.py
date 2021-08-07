@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 import os
-import paho.mqtt.client as mqtt
 import pymongo
-import time
 
 ###########################################################
 #connect database
@@ -29,31 +27,3 @@ def get_one():
         break
     
     return text
-
-###########################################################
-#set db via mqtt
-def set_db():
-    #print("Connecting to MQTT broker:" + BrokerAddress)
-    client = mqtt.Client()               # Create new instance with Any clientID
-    msg = str(message.payload.decode("utf-8"))
-    keys_list = ["datetime", "date", "time", "humidity"]
-    values_list = msg.split(",")
-    mydoc = {}
-    for i in range(len(keys_list)):
-        mydoc[keys_list[i]] = values_list[i]
-
-    x = mycol.insert_one(mydoc)
-    client.on_message=on_message         # Attach function to callback
-    try:
-        client.connect(BrokerAddress)    #connect to broker
-    except:
-        #print("***** Broker connection failed *****")
-        exit(1) 
-
-    ### Subscribe ###
-    #print("Subscribe topic:", MqttTopic)
-    client.subscribe(MqttTopic)          # Subscribe MQTT
-
-    ### loop forever to wait a message ###
-    #print("Waiting message...")
-    client.loop_forever()                # Loop forever
