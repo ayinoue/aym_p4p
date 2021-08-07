@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from setenv import db_user,db_pw
 import os
 import paho.mqtt.client as mqtt
 import pymongo
@@ -14,8 +15,6 @@ MqttTopic = "ayinoueTopic"
 
 ###########################################################
 #connect database
-db_user = os.environ["mongodb_user"]
-db_pw = os.environ["mongodb_pw"]
 conn = "mongodb+srv://" + db_user + ":" + db_pw + "@cluster0.vaogw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 myclient = pymongo.MongoClient(conn)
 mydb = myclient.RPi
@@ -26,8 +25,7 @@ mycol = mydb.sensorData
 
 def on_message(client, userdata, message):  ### callback when get message from MQTT broker
     msg = str(message.payload.decode("utf-8"))
-    print("Message received:" + msg)
-    print(msg)
+    #print("Message received:" + msg)
     set_db(msg)                             ### call Function set_db(msg)
 
 def set_db(msg):                            ### set data to mongodb 
@@ -61,6 +59,6 @@ print("Subscribe topic:", MqttTopic)
 client.subscribe(MqttTopic)          # Subscribe MQTT
 
 ### loop forever to wait a message ###
-print("Waiting message...")
+#print("Waiting message...")
 client.loop_forever()                # Loop forever
 
