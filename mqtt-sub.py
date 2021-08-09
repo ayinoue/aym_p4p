@@ -36,9 +36,10 @@ def set_db(msg):                            ### set data to mongodb
     for i in range(len(keys_list)):
         mydoc[keys_list[i]] = values_list[i]
 
-    x = mycol.insert_one(mydoc)
+    #send data to mongodb per 10 min (hh:M"M":ss)
+    if mydoc["time"][4] == "0":
+        x = mycol.insert_one(mydoc)
     #print (x)
-    #print(mydoc)
     
 
 ###########################################################
