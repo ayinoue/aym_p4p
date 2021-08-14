@@ -1,6 +1,7 @@
 from concurrent.futures import TimeoutError
 from google.cloud import pubsub_v1
 from setenv import db_user,db_pw
+import ast
 import os
 import pymongo
 import time
@@ -25,28 +26,17 @@ subscriber = pubsub_v1.SubscriberClient()
 subscription_path = subscriber.subscription_path(project_id, subscription_id)
 
 def callback(message):
-    #print(f"Received {message}.")
-    #print(message)
-    list_msg = [] 
-    list_msg = message.data.decode('utf-8')
-    values_list = list_msg.split(",")
-    #print(values_list)
-    set_db(values_list)
-    ##message.ack()
+    str_json = message.data.decode('utf-8')
+    set_db(str_json)
+    message.ack()
 
 # set data to mongodb 
-def set_db(values_list):
-    #Insert a document
-    keys_list = ["datetime", "humidity"]
-    mydoc = {}
-    for i in range(len(keys_list)):
-        mydoc[keys_list[i]] = values_list[i]
-
-    #print(mydoc)
+def set_db(str_json):
+    #convert string to dictionary
+    mydoc = ast.literal_eval(str_json)
     #send data to mongodb per 10 min (hh:M"M":ss)
     if mydoc["datetime"][-4] == "0":
         mycol.insert_one(mydoc)
-        pass
 
 #print(f"Listening for messages on {subscription_path}..\n")
 
