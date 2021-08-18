@@ -51,15 +51,18 @@ def set_db(str_json):
         mycol.insert_one(mydoc)
 
 def push_line(str_json):
+    global enough_water
     line_bot_api = LineBotApi(line_toooooooken)
     # enough water?
     mydoc = ast.literal_eval(str_json)
     water = int(mydoc["humidity"])
-    if water < 90 and enough_water == 1:
+    if water < 90 and enough_water == 1 and mydoc["datetime"][-4] == "0":
         messages = TextSendMessage(text="ひまわり「そろそろ水がほしい」")
-        line_bot_api.push_message(user_id, messages=messages)
+        line_bot_api.push_message(line_user_id, messages=messages)
         enough_water = 0
-    elif water >= 90:
+    elif water >= 90 and enough_water == 0 and mydoc["datetime"][-4] == "0":
+        messages = TextSendMessage(text="ひまわり「（ｺﾞｸｺﾞｸ）」")
+        line_bot_api.push_message(line_user_id, messages=messages)
         enough_water = 1
 
 def set_gspreadsheet(str_json):
